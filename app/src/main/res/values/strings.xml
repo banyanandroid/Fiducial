@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Fiducial</string>
+    <string name="title_task">TASK</string>
+    <string name="title_enquiry">ENQUIRY</string>
+    <string name="title_customer">CUSTOMER</string>
+    <string name="title_profile">My Profile</string>
+
+    <string-array name="spinner_task_status">
+        <item>Select Task Status</item>
+        <item>Not Completed</item>
+        <item>Completed</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:id="@+id/alert_edt_taskname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="SCHEDULE NAME"
+            android:textSize="14sp"
+            android:inputType="text"
+            android:textAllCaps="true"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:id="@+id/alert_edt_taskdes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="SCHEDULE DECRIPTION"
+            android:layout_margin="16dp"
+            android:inputType="text"
+            android:textSize="14sp"
+            android:textAllCaps="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_margin="16dp"
+            android:weightSum="2">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/edt_scedule_date"
+                    android:layout_width="240dp"
+                    android:layout_height="match_parent"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="SET DATE"
+                    android:textSize="14sp"
+                    android:inputType="text"
+                    tools:ignore="Deprecated" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_set_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="15dp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_bg"
+                android:layout_weight="1"
+                android:text="Set" />
+
+        </LinearLayout>
+
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>
