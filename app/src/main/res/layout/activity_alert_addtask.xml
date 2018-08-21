@@ -48,7 +48,7 @@
         android:id="@+id/alert_src_spinner"
         android:layout_width="match_parent"
         android:layout_margin="16dp"
-        android:hint="ASSIGNEDTO"
+        android:hint="ASSIGNED TO"
         android:textSize="14sp"
         android:textAllCaps="true"
         android:layout_height="wrap_content"
