@@ -80,7 +80,6 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
     ArrayList<String> Arraylist_city_id = null;
     ArrayList<String> Arraylist_city_name = null;
 
-    ArrayAdapter<String> mState, mCity;
     public static RequestQueue queue;
     Spinner spn_pre_state, spn_pre_city;
 
@@ -88,7 +87,7 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
     String str_state, str_state_id, str_city_id, str_city_name;
 
     // edittext field string name
-    String customer_name, address1, address2, city, state, country, postalcode, phonoNo, mobileNo, Email, UserId, UserType;
+    String customer_name, address,zipcode, landline, mobileNo, Email, UserId, UserType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -389,12 +388,11 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
                     String message = obj_one.getString("message");
 
                     if (status == 1) {
-                        TastyToast.makeText(getApplicationContext(), "Enquiry Added Successfully", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
-                        Intent back_enquiry = new Intent(getApplicationContext(), Actvitity_Customize_Grid.class);
-                        back_enquiry.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        startActivity(back_enquiry);
-                    } else {
-                        TastyToast.makeText(getApplicationContext(), "Enquiry Added Unsuccessfully", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                        Toast_Show.displayToast(getApplicationContext(),message);
+
+                        /*Intent intent = new Intent(Actvity_Add_Pre_Enquiry.this, Activity_Menu.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        startActivity(intent);*/
                     }
 
                 } catch (JSONException e) {
@@ -414,17 +412,31 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put(TAG_CUSTOMER_NAME, customer_name);
-                params.put(TAG_Address1, "");
+                params.put(TAG_Address1, address);
                 params.put(TAG_ADDRESS2, "");
                 params.put(TAG_CITY, str_city_id);
                 params.put(TAG_STATE, str_state_id);
                 params.put(TAG_COUNTRY, "INDIA");
-                params.put(TAG_POSTALCODE, "");
-                params.put(TAG_PHO_NO, "");
+                params.put(TAG_POSTALCODE, zipcode);
+                params.put(TAG_PHO_NO, landline);
                 params.put(TAG_MOB_NO, mobileNo);
-                params.put(TAG_EMAIl, "");
+                params.put(TAG_EMAIl, Email);
                 params.put(TAG_USERID, str_userId);
                 params.put(TAG_USERTYPE, str_userTpye);
+
+                System.out.println(TAG_CUSTOMER_NAME + customer_name);
+                System.out.println(TAG_Address1 + address);
+                System.out.println(TAG_ADDRESS2 + "");
+                System.out.println(TAG_CITY + str_city_id);
+                System.out.println(TAG_STATE + str_state_id);
+                System.out.println(TAG_COUNTRY + "INDIA");
+                System.out.println(TAG_POSTALCODE + zipcode);
+                System.out.println(TAG_PHO_NO + landline);
+                System.out.println(TAG_MOB_NO + mobileNo);
+                System.out.println(TAG_EMAIl + Email);
+                System.out.println(TAG_USERID + str_userId);
+                System.out.println(TAG_USERTYPE + str_userTpye);
+
 
                 return checkParams(params);
 
@@ -452,15 +464,25 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
     public void onClick(View v) {
         customer_name = edt_pre_name.getText().toString();
         mobileNo = edt_pre_mobile.getText().toString();
+        address = edt_pre_address.getText().toString();
+        zipcode = edt_pre_zipcode.getText().toString();
+        landline = edt_pre_landline.getText().toString();
+        Email = edt_pre_email.getText().toString();
         if (customer_name.isEmpty()) {
             Toast_Show.displayToast(getApplicationContext(), "Please Enter the Customer name");
-        } else if (mobileNo.isEmpty() || mobileNo.length() < 10) {
-            Toast_Show.displayToast(getApplicationContext(), "Please Enter the Valid mobile number");
-        } else {
-            Prelinimanary_EnquiryDetails();
-            Intent intent = new Intent(Actvity_Add_Pre_Enquiry.this, Activity_Menu.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(intent);
+        } else if (mobileNo.isEmpty()) {
+            Toast_Show.displayToast(getApplicationContext(), "Please Enter mobile number");
+        }
+        else if(mobileNo.length() != 10 || mobileNo.length()>10) {
+            Toast_Show.displayToast(getApplicationContext(),"Please enter 10 digit mobile number");
+        }
+        else
+         {
+             dialog = new SpotsDialog(Actvity_Add_Pre_Enquiry.this);
+             dialog.show();
+             queue = Volley.newRequestQueue(getApplicationContext());
+             Prelinimanary_EnquiryDetails();
+
         }
     }
 }

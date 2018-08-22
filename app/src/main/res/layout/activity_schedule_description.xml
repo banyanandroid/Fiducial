@@ -126,9 +126,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/btn_bg"
+                android:textColor="@color/icons"
                 android:gravity="center"
                 android:text="UPDATE"
-                android:textColor="@color/textColorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 

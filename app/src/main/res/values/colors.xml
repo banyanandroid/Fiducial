@@ -19,7 +19,6 @@
     <color name="background">#e8eaf6</color>
 
     <color name="colorAccentBlue">#2196f3</color>
-    <color name="textColorPrimary">#FFFFFF</color>
 
     <string-array name="movie_serial_bg">
         <item>#24c6d5</item>

@@ -170,7 +170,7 @@
                 android:background="@drawable/btn_bg"
                 android:gravity="center"
                 android:text="Update"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="@color/icons"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
