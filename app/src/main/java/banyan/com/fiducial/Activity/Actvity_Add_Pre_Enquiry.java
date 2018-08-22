@@ -1,9 +1,11 @@
 package banyan.com.fiducial.Activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -87,7 +89,7 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
     String str_state, str_state_id, str_city_id, str_city_name;
 
     // edittext field string name
-    String customer_name, address,zipcode, landline, mobileNo, Email, UserId, UserType;
+    String customer_name, address, zipcode, landline, mobileNo, Email, UserId, UserType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -373,34 +375,62 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
         queue.add(request);
     }
 
-    // send all enquiry data to server
-    public void Prelinimanary_EnquiryDetails() {
+    /******************************************
+     *    Proceed Function
+     * ****************************************/
+    private void Function_Proceed() {
 
-        StringRequest request = new StringRequest(Request.Method.POST, App_Config.url_preliminary_enquiry, new Response.Listener<String>() {
-
+        StringRequest request = new StringRequest(Request.Method.POST,
+                App_Config.url_preliminary_enquiry, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                Log.d("### PROCEED", response.toString());
+                Log.d("##ADD ENQ", response.toString());
                 try {
-                    JSONObject obj_one = new JSONObject(response);
+                    JSONObject obj = new JSONObject(response);
+                    System.out.println("REG 00" + obj);
 
-                    int status = obj_one.getInt("status");
-                    String message = obj_one.getString("message");
+                    int success = obj.getInt("status");
 
-                    if (status == 1) {
-                        Toast_Show.displayToast(getApplicationContext(),message);
+                    System.out.println("REG" + success);
 
-                        /*Intent intent = new Intent(Actvity_Add_Pre_Enquiry.this, Activity_Menu.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        startActivity(intent);*/
+                    if (success == 1) {
+
+                        dialog.dismiss();
+
+                        TastyToast.makeText(getApplicationContext(), "Enquiry Added Successfully!", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+
+                        new AlertDialog.Builder(Actvity_Add_Pre_Enquiry.this)
+                                .setTitle("Fiducial")
+                                .setMessage("Enquiry Added Successfully !")
+                                .setIcon(R.mipmap.ic_launcher)
+                                .setPositiveButton("Ok",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog,
+
+                                                                int which) {
+                                                // TODO Auto-generated method stub
+
+
+
+                                            }
+
+                                        }).show();
+                    } else {
+
+                        TastyToast.makeText(getApplicationContext(), "Oops...! Try again Later..!", TastyToast.LENGTH_LONG, TastyToast.WARNING);
                     }
 
+                    dialog.dismiss();
                 } catch (JSONException e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
             }
         }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
 
@@ -437,9 +467,8 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
                 System.out.println(TAG_USERID + str_userId);
                 System.out.println(TAG_USERTYPE + str_userTpye);
 
-
                 return checkParams(params);
-
+                //return params;
             }
 
             private Map<String, String> checkParams(Map<String, String> map) {
@@ -452,16 +481,19 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
                 }
                 return map;
             }
-
         };
 
         int socketTimeout = 60000;//30 seconds - change to what you want
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         request.setRetryPolicy(policy);
+
+        // Adding request to request queue
+        queue.add(request);
     }
 
     @Override
     public void onClick(View v) {
+
         customer_name = edt_pre_name.getText().toString();
         mobileNo = edt_pre_mobile.getText().toString();
         address = edt_pre_address.getText().toString();
@@ -472,17 +504,15 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
             Toast_Show.displayToast(getApplicationContext(), "Please Enter the Customer name");
         } else if (mobileNo.isEmpty()) {
             Toast_Show.displayToast(getApplicationContext(), "Please Enter mobile number");
-        }
-        else if(mobileNo.length() != 10 || mobileNo.length()>10) {
-            Toast_Show.displayToast(getApplicationContext(),"Please enter 10 digit mobile number");
-        }
-        else
-         {
-             dialog = new SpotsDialog(Actvity_Add_Pre_Enquiry.this);
-             dialog.show();
-             queue = Volley.newRequestQueue(getApplicationContext());
-             Prelinimanary_EnquiryDetails();
+        } else if (mobileNo.length() != 10 || mobileNo.length() > 10) {
+            Toast_Show.displayToast(getApplicationContext(), "Please enter 10 digit mobile number");
+        } else {
 
+            System.out.println("### FUN CALLLED");
+            dialog = new SpotsDialog(Actvity_Add_Pre_Enquiry.this);
+            dialog.show();
+            queue = Volley.newRequestQueue(Actvity_Add_Pre_Enquiry.this);
+            Function_Proceed();
         }
     }
 }

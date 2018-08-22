@@ -199,6 +199,14 @@ public class Activity_Login extends Activity implements SimpleLocationGetter.OnL
             }
         });
 
+        try {
+
+            NewLocation();
+
+        }catch (Exception e) {
+
+        }
+
         // ON LOGIN
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -525,54 +533,6 @@ public class Activity_Login extends Activity implements SimpleLocationGetter.OnL
         back_pressed = System.currentTimeMillis();
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        startTimer();
-    }
-
-    public void startTimer() {
-
-        timer = new Timer();
-
-        initializeTimerTask();
-
-        timer.schedule(timerTask, 30000, 30000); // 30 Sec
-
-    }
-
-    public void initializeTimerTask() {
-
-        timerTask = new TimerTask() {
-
-            public void run() {
-
-                // use a handler to run a toast that shows the current timestamp
-
-                handler.post(new Runnable() {
-
-                    public void run() {
-
-                        try {
-                            System.out.println("LOCATING?");
-
-                            //StartLocating();
-                            NewLocation();
-
-                        } catch (Exception e) {
-                            // TODO: handle exception
-                        }
-
-                    }
-
-                });
-
-            }
-
-        };
-    }
-
     // location code
     public void NewLocation() {
 
@@ -594,15 +554,6 @@ public class Activity_Login extends Activity implements SimpleLocationGetter.OnL
 
         str_lat = String.valueOf(latitude);
         str_long = String.valueOf(longitude);
-
-        try {
-            System.out.println("LATT :: " + str_lat);
-            System.out.println("LONGG :: " + str_long);
-            queue = Volley.newRequestQueue(Activity_Login.this);
-             UpdateMyLocation();
-        } catch (Exception e) {
-
-        }
     }
 
     @Override
@@ -682,73 +633,4 @@ public class Activity_Login extends Activity implements SimpleLocationGetter.OnL
         });
     }
 
-    // Update User Location
-    private void UpdateMyLocation() {
-
-        StringRequest request = new StringRequest(Request.Method.POST, App_Config.url_update_location, new com.android.volley.Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, response.toString());
-                Log.d("USER_LOCATION", response.toString());
-                try {
-                    JSONObject obj = new JSONObject(response);
-                    int success = obj.getInt("success");
-
-                    System.out.println("REG" + success);
-
-                    if (success == 1) {
-
-                        System.out.println("Going Finely");
-
-                    } else {
-                        System.out.println("Something Went Wrong");
-                    }
-                } catch (JSONException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("userid", str_user_id);
-                params.put("lat", str_lat);
-                params.put("long", str_long);
-
-                System.out.println("userid" + str_user_id);
-                System.out.println("str_lat" + str_lat);
-                System.out.println("str_long" + str_long);
-
-                return checkParams(params);
-            }
-
-            private Map<String, String> checkParams(Map<String, String> map) {
-                Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, String> pairs = (Map.Entry<String, String>) it.next();
-                    if (pairs.getValue() == null) {
-                        map.put(pairs.getKey(), "");
-                    }
-                }
-                return map;
-            }
-        };
-
-        int socketTimeout = 60000;//30 seconds - change to what you want
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        request.setRetryPolicy(policy);
-        // Adding request to request queue
-        queue.add(request);
-    }
 }
