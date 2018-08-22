@@ -32,6 +32,11 @@
         <activity android:name=".Activity.Activity_Task_Description"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <activity android:name=".Activity.Actvity_Add_Pre_Enquiry"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".Activity.Actvitity_Customize_Grid"/>
+
     </application>
 
 </manifest>

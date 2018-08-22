@@ -110,6 +110,8 @@ public class Session_Manager {
         user.put(KEY_USER_ID, pref.getString(KEY_USER_ID, null));
         user.put(KEY_USER_NAME, pref.getString(KEY_USER_NAME, null));
         user.put(KEY_USER_TYPE, pref.getString(KEY_USER_TYPE, null));
+        user.put(KEY_USER_ROLE, pref.getString(KEY_USER_ROLE, null));
+        // return user
         // return user
         return user;
     }

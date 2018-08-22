@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import banyan.com.fiducial.Adapter.Adapter_AllEnquiry_List;
+import banyan.com.fiducial.Adapter.Adapter_All_Enquiry_List;
 import banyan.com.fiducial.R;
 
 public class Fragment_AllEnquiry_List extends Fragment
@@ -19,7 +19,7 @@ public class Fragment_AllEnquiry_List extends Fragment
     ListView all_enquiry_list;
     SwipeRefreshLayout refreshLayout;
     FloatingActionButton fab_enquiry;
-    Adapter_AllEnquiry_List adapter_allEnquiry_list;
+    Adapter_All_Enquiry_List adapter_allEnquiry_list;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,7 +27,6 @@ public class Fragment_AllEnquiry_List extends Fragment
         all_enquiry_list = (ListView)v.findViewById(R.id.list_enquiry_list);
         refreshLayout  = (SwipeRefreshLayout)v.findViewById(R.id.enquiry_list_swipe_refresh_layout);
         fab_enquiry = (FloatingActionButton)v.findViewById(R.id.fab_enquiry);
-        adapter_allEnquiry_list = new Adapter_AllEnquiry_List();
 
         return v;
     }

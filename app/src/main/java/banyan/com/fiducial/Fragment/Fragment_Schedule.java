@@ -108,6 +108,8 @@ public class Fragment_Schedule extends Fragment implements SwipeRefreshLayout.On
         str_user_type = user.get(Session_Manager.KEY_USER_TYPE);
         str_user_role = user.get(Session_Manager.KEY_USER_ROLE);
 
+        System.out.println("SESSION_DETAILS :"+str_user_role);
+
         fab_addschedule = (FloatingActionButton) rootView.findViewById(R.id.fab_add_schedule);
 
         mytask_listView = (ListView) rootView.findViewById(R.id.listView_mytask);

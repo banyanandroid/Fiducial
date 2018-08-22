@@ -5,14 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import java.util.HashMap;
-
+import banyan.com.fiducial.Fragment.Fragment_Customers;
+import banyan.com.fiducial.Fragment.Fragment_MyProfile;
 import banyan.com.fiducial.Fragment.Fragment_Task_Home;
 import banyan.com.fiducial.Global.Session_Manager;
 import banyan.com.fiducial.R;
@@ -30,16 +27,21 @@ public class Activity_Menu extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_task:
                     fragment = new Fragment_Task_Home();
-                    return true;
+                    break;
                 case R.id.navigation_enquiry:
-
-                    return true;
+                    /*fragment = new Fragment_Enquiry_Pager()*/;
+                    Intent intent = new Intent(getApplicationContext(),Actvitity_Customize_Grid.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
+                    break;
                 case R.id.navigation_Customer:
-
-                    return true;
+                    fragment = new Fragment_Customers();
+                    break;
                 case R.id.navigation_profile:
-
-                    return true;
+                    fragment = new Fragment_MyProfile();
+                   break;
+                   default:
+                       break;
             }
 
             return loadFragment(fragment);

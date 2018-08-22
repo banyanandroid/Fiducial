@@ -36,6 +36,9 @@ public class Fragment_Enquiry_Pager extends Fragment {
         viewPager = (ViewPager) rootview.findViewById(R.id.viewpager_enquiry);
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
 
+        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
         tabLayout.post(new Runnable() {
             @Override
             public void run() {

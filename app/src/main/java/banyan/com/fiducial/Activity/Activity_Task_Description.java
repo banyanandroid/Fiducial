@@ -53,7 +53,7 @@ public class Activity_Task_Description extends AppCompatActivity {
 
     private Toolbar mToolbar;
     EditText edt_name, edt_description, edt_comment, edt_date;
-    String str_user_id,str_user_type;
+    String str_user_id,str_user_type,str_user_role;
     String image_type = "",encodedstring="",  str_selected_image = "",listString="";
 
     String str_task_created_by, str_task_comment, str_task_id, str_task_name, str_task_description,
@@ -117,9 +117,14 @@ public class Activity_Task_Description extends AppCompatActivity {
         HashMap<String, String> user = session.getUserDetails();
 
         str_user_id = user.get(Session_Manager.KEY_USER_ID);
-        str_user_type = user.get(Session_Manager.KEY_USER_TYPE);
+        System.out.println("GET_USER_ID :"+str_user_id);
 
-        image_upload.setVisibility(View.GONE);
+        str_user_type = user.get(Session_Manager.KEY_USER_TYPE);
+        str_user_role = user.get(Session_Manager.KEY_USER_ROLE);
+
+        System.out.println("SESSION_DETAILS :"+str_user_role);
+
+        /*image_upload.setVisibility(View.GONE);*/
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("TASK DESCRIPTION");
@@ -158,6 +163,9 @@ public class Activity_Task_Description extends AppCompatActivity {
 
             }
         });
+
+        // check while the user id admin or sales person
+
 
         // task status
         spnr_task_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

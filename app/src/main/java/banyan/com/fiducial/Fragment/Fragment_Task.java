@@ -186,7 +186,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
     @Override
     public void onRefresh() {
         try {
-            complaint_list.clear();
+            //complaint_list.clear();
             pDialog = new ProgressDialog(getActivity());
             pDialog.setMessage("PLEASE WAIT...");
             pDialog.setCancelable(true);
@@ -221,7 +221,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
         //get user_list
         try {
 
-            complaint_list = new ArrayList<>();
+            //complaint_list = new ArrayList<>();
             Lname = new ArrayList<>();
             lId = new ArrayList<>();
 

@@ -26,6 +26,8 @@ public class App_Config
     public static String url_preliminary_enquiry =BASE_URL+ "/add_preliminary_enquiry";
     // state list
     public static String url_state = BASE_URL+ "/list_state";
+    // city
+    public static String url_city =BASE_URL+ "/list_city";
     // list task
     public static String url_list_Task = BASE_URL+ "/list_task";
     // list addtask
