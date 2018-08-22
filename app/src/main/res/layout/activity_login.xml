@@ -6,156 +6,143 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center">
+            android:layout_height="@dimen/custom_login_header_size"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_bg_shape">
+
+                <com.romainpiel.shimmer.ShimmerTextView
+                    android:id="@+id/shimmer_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Fiducial"
+                    android:textColor="@color/primary_text"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/custom_login_header_size"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <com.romainpiel.shimmer.ShimmerTextView
-                            android:id="@+id/shimmer_tv"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:text="Fiducial"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="25sp" />
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-
-                <android.support.v7.widget.CardView
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="10dp">
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:drawableLeft="@drawable/ic_email_black_24dp"
+                    android:drawablePadding="@dimen/activity_vertical_margin"
+                    android:hint="Email"
+                    android:inputType="text"
+                    app:met_floatingLabel="highlight"
+                    app:met_maxCharacters="30" />
 
-                    <LinearLayout
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content">
 
                         <com.rengwuxian.materialedittext.MaterialEditText
-                            android:id="@+id/edt_email"
+                            android:id="@+id/edt_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/activity_vertical_margin"
-                            android:layout_marginRight="@dimen/activity_vertical_margin"
-                            android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:drawableLeft="@drawable/ic_email_black_24dp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:drawableLeft="@drawable/ic_lock_black_24dp"
                             android:drawablePadding="@dimen/activity_vertical_margin"
-                            android:hint="Email"
-                            android:inputType="text"
-                            android:paddingLeft="@dimen/activity_vertical_margin"
+                            android:hint="Password"
+                            android:inputType="textPassword"
                             app:met_floatingLabel="highlight"
-                            app:met_maxCharacters="30" />
+                            app:met_maxCharacters="15" />
 
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/password_view"
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="35dp"
+                            android:src="@drawable/close_eyes" />
+                    </RelativeLayout>
+                </FrameLayout>
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin">
 
-                                <com.rengwuxian.materialedittext.MaterialEditText
-                                    android:id="@+id/edt_password"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                                    android:layout_marginRight="@dimen/activity_vertical_margin"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:drawableLeft="@drawable/ic_lock_black_24dp"
-                                    android:drawablePadding="@dimen/activity_vertical_margin"
-                                    android:hint="Password"
-                                    android:inputType="textPassword"
-                                    android:paddingLeft="@dimen/activity_vertical_margin"
-                                    app:met_floatingLabel="highlight"
-                                    app:met_maxCharacters="15" />
+                    <Button
+                        android:id="@+id/btn_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/border_bg_shape"
+                        android:text="Login"
+                        android:textColor="@color/primary_text" />
 
-                                <ImageView
-                                    android:id="@+id/password_view"
-                                    android:layout_width="35dp"
-                                    android:layout_height="25dp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_marginRight="15dp"
-                                    android:layout_marginTop="35dp"
-                                    android:src="@drawable/close_eyes" />
-                            </RelativeLayout>
-                        </FrameLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
-                        <com.balysv.materialripple.MaterialRippleLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/activity_vertical_margin"
-                            android:layout_marginRight="@dimen/activity_vertical_margin"
-                            android:layout_marginTop="@dimen/activity_horizontal_margin">
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                            <Button
-                                android:id="@+id/btn_login"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/btn_background"
-                                android:text="Login"
-                                android:textColor="@android:color/white" />
+                    <TextView
+                        android:id="@+id/txt_forgot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:gravity="center"
+                        android:text="Forget Password ? "
+                        android:textSize="16sp" />
 
-                        </com.balysv.materialripple.MaterialRippleLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
-                        <com.balysv.materialripple.MaterialRippleLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:id="@+id/txt_forgot"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                                android:layout_marginTop="@dimen/activity_vertical_margin"
-                                android:gravity="center"
-                                android:text="Forget Password ? "
-                                android:textSize="16sp" />
-
-                        </com.balysv.materialripple.MaterialRippleLayout>
-
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-    </ScrollView>
+    </LinearLayout>
+
 
 
 </LinearLayout>

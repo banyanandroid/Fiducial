@@ -70,29 +70,29 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
     public static final String TAG_USER_NAME = "name";
     public static final String TAG_USER_ID = "id";
 
-    String str_user_id,str_user_type;
+    String str_user_id, str_user_type;
     String str_user_role;
-    String str_task_name,str_task_description,str_task_assignedto;
+    String str_task_name, str_task_description, str_task_assignedto;
 
     ProgressDialog pDialog;
     public static RequestQueue queue;
 
     static ArrayList<HashMap<String, String>> complaint_list;
 
-    ArrayList<String> Lname,lId;
+    ArrayList<String> Lname, lId;
 
     public Adapter_Task adapter;
 
     // Session Manager Class
     Session_Manager session;
 
-    String str_name,  str_emp_id;
+    String str_name, str_emp_id;
     String user_list_id;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView =  inflater.inflate(R.layout.fragment_task, null);
+        View rootView = inflater.inflate(R.layout.fragment_task, null);
 
         session = new Session_Manager(getActivity());
         session.checkLogin();
@@ -111,7 +111,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
         listView = (ListView) rootView.findViewById(R.id.listView_task);
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout_task);
 
-        fab_addtask= (FloatingActionButton) rootView.findViewById(R.id.fab_add_task);
+        fab_addtask = (FloatingActionButton) rootView.findViewById(R.id.fab_add_task);
 
         // Hashmap for ListView
         complaint_list = new ArrayList<HashMap<String, String>>();
@@ -199,7 +199,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     /*****************************
-         * Add My Task Alert *
+     * Add My Task Alert *
      ***************************/
 
     public void AddTask() {
@@ -216,7 +216,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
         edt_task_name.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         final EditText edt_task_description = (EditText) promptsView.findViewById(R.id.alert_edt_taskdes);
         edt_task_description.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-        spn_spinner = (SearchableSpinner)promptsView.findViewById(R.id.alert_src_spinner);
+        spn_spinner = (SearchableSpinner) promptsView.findViewById(R.id.alert_src_spinner);
 
         //get user_list
         try {
@@ -226,7 +226,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
             lId = new ArrayList<>();
 
             queue = Volley.newRequestQueue(getActivity());
-            GetUsersList ();
+            GetUsersList();
 
         } catch (Exception e) {
 
@@ -239,7 +239,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
                 String assigned_user_name = parent.getItemAtPosition(position).toString();
 
                 user_list_id = lId.get(position);
-                System.out.println("get_user_id : "+user_list_id);
+                System.out.println("get_user_id : " + user_list_id);
 
             }
 
@@ -263,7 +263,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
                         } else if (str_task_description.equals("")) {
                             edt_task_name.setError("PLEASE ENTER TASK DESCRIPTION");
                         } else if (str_task_assignedto.equals("")) {
-                            Toast.makeText(getActivity(),"PLEASE SELECT ASSIGNED USER",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "PLEASE SELECT ASSIGNED USER", Toast.LENGTH_SHORT).show();
                         } else {
 
                             pDialog = new ProgressDialog(getActivity());
@@ -292,7 +292,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     /*****************************
-            * GET TASK
+     * GET TASK
      ***************************/
 
     public void GetMyTask() {
@@ -302,7 +302,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, response.toString());
-                System.out.println("GER_RESPONSE :"+response);
+                System.out.println("GER_RESPONSE :" + response);
                 try {
 
                     JSONObject obj = new JSONObject(response);
@@ -341,15 +341,13 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
 
                         System.out.println("TASK HASHMAP ARRAY" + complaint_list);
 
-                        adapter = new Adapter_Task( getActivity(), complaint_list);
+                        adapter = new Adapter_Task(getActivity(), complaint_list);
                         listView.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
-                    }else if (status == 0){
+                    } else if (status == 0) {
 
                         adapter = new Adapter_Task(getActivity(), complaint_list);
                         listView.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
-                        TastyToast.makeText(getContext(),"No data available",TastyToast.LENGTH_SHORT,TastyToast.WARNING);
+                        TastyToast.makeText(getContext(), "No data available", TastyToast.LENGTH_SHORT, TastyToast.WARNING);
 
                     }
 
@@ -377,7 +375,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("user_id", str_user_id);
-                params.put("user_type",str_user_type);
+                params.put("user_type", str_user_type);
 
                 System.out.println("task_user_id" + str_user_id);
                 System.out.println("task_user_type" + str_user_type);
@@ -394,7 +392,6 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
     /********************************
      * Function_addTask
      ********************************/
-
     private void Function_addTask() {
 
         StringRequest request = new StringRequest(Request.Method.POST, App_Config.url_addTask, new Response.Listener<String>() {
@@ -414,7 +411,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
 
                     if (status == 1) {
 
-                        TastyToast.makeText(getContext(), "TASK  ADDED SUCCESSFULLY",  TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                        TastyToast.makeText(getContext(), "TASK  ADDED SUCCESSFULLY", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
                         pDialog.hide();
 
                         try {
@@ -430,7 +427,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
                     } else {
 
                         pDialog.hide();
-                        TastyToast.makeText(getContext(), "TASK  ADDED UNSUCCESSFULLY",  TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                        TastyToast.makeText(getContext(), "TASK  ADDED UNSUCCESSFULLY", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
                     }
 
                 } catch (JSONException e) {
@@ -451,10 +448,10 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("taskName",str_task_name);
+                params.put("taskName", str_task_name);
                 params.put("taskDescription", str_task_description);
                 params.put("user_id", str_user_id);
-                params.put("taskAssignedTo",  user_list_id);
+                params.put("taskAssignedTo", user_list_id);
                 params.put("user_type", str_user_type);
                 params.put("user_role", str_user_role);
 
@@ -467,7 +464,6 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
 
                 return params;
             }
-
         };
 
 
@@ -489,7 +485,7 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
 
                 try {
 
-                    System.out.println("USER_GET_RESPONSE :"+response);
+                    System.out.println("USER_GET_RESPONSE :" + response);
 
                     JSONObject obj = new JSONObject(response);
                     int status = obj.getInt("status");
@@ -506,12 +502,12 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
                             String name = obj1.getString(TAG_USER_NAME);
                             String id = obj1.getString(TAG_USER_ID);
 
-                            System.out.println("printId :"+id);
+                            System.out.println("printId :" + id);
                             // creating new HashMap
                             HashMap<String, String> map = new HashMap<String, String>();
 
                             // adding each child node to HashMap key => value
-                            map.put(TAG_USER_NAME,name );
+                            map.put(TAG_USER_NAME, name);
                             map.put(TAG_USER_ID, id);
 
                             complaint_list.add(map);
@@ -531,15 +527,15 @@ public class Fragment_Task extends Fragment implements SwipeRefreshLayout.OnRefr
                         }
 
 
-                        adapter = new Adapter_Task( getActivity(), complaint_list);
+                        adapter = new Adapter_Task(getActivity(), complaint_list);
                         listView.setAdapter(adapter);
 
-                    }else if (status == 0){
+                    } else if (status == 0) {
 
                         adapter = new Adapter_Task(getActivity(), complaint_list);
                         listView.setAdapter(adapter);
 
-                        TastyToast.makeText(getContext(),"No data available",TastyToast.LENGTH_SHORT,TastyToast.WARNING);
+                        TastyToast.makeText(getContext(), "No data available", TastyToast.LENGTH_SHORT, TastyToast.WARNING);
 
                     }
 

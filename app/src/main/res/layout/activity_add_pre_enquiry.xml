@@ -18,159 +18,152 @@
         android:layout_gravity="center"
         android:layout_margin="15dp">
 
-
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edt_pre_name"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:drawablePadding="@dimen/activity_vertical_margin"
-                    android:hint="ENTER NAME"
-                    android:inputType="text"
-                    android:paddingLeft="@dimen/activity_vertical_margin"
-                    android:shadowColor="@color/black"
-                    android:textAllCaps="true"
-                    app:met_floatingLabel="highlight"
-                    app:met_maxCharacters="30" />
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edt_pre_mobile"
+                    <EditText
+                        android:id="@+id/edt_pre_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        android:inputType="text"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:maxLength="10"
-                    android:layout_marginTop="10dp"
-                    android:drawablePadding="@dimen/activity_vertical_margin"
-                    android:hint="ENTER MOBILE NUMBER"
-                    android:inputType="number"
-                    android:paddingLeft="@dimen/activity_vertical_margin"
-                    app:met_floatingLabel="highlight"/>
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
 
+                    <EditText
+                        android:id="@+id/edt_pre_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mobile Number"
+                        android:inputType="phone"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
                     android:id="@+id/select_country"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="6">
+                    android:weightSum="2">
 
                     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:id="@+id/spn_pre_state"
                         android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="15dp"
-                        android:layout_weight="3"
-                        android:autofillHints="SELECT CONTRY"
-                        android:gravity="center"
-                        android:scaleType="fitXY"
-                        android:textAllCaps="true"
-                        android:textSize="16sp" />
+                        android:layout_height="50dp"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        app:hintText="Select Country" />
+
 
                     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:id="@+id/spn_pre_city"
                         android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="15dp"
-                        android:layout_weight="3"
-                        android:autofillHints="SELECT STATE"
-                        android:gravity="center"
-                        android:scaleType="fitXY"
-                        android:textAllCaps="true"
-                        android:textSize="16sp" />
+                        android:layout_height="50dp"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        app:hintText="Select State" />
                 </LinearLayout>
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edt_pre_zipcode"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:drawablePadding="@dimen/activity_vertical_margin"
-                    android:hint="ENTER ZIP CODE"
-                    android:inputType="number"
-                    android:paddingLeft="@dimen/activity_vertical_margin"
-                    android:shadowColor="@color/black"
-                    android:textAllCaps="true"
-                    app:met_floatingLabel="highlight"
-                    app:met_maxCharacters="10" />
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edt_pre_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
-                    android:drawablePadding="@dimen/activity_vertical_margin"
-                    android:hint="ENTER ADDRESS"
-                    android:inputType="textMultiLine"
-                    android:maxLines="10"
-                    android:minLines="5"
-                    android:paddingLeft="@dimen/activity_vertical_margin"
-                    app:met_floatingLabel="highlight"
-                    app:met_maxCharacters="120" />
+                    <EditText
+                        android:id="@+id/edt_pre_zipcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Zip Code"
+                        android:inputType="phone"
+                        android:maxLength="6"
+                        android:singleLine="true" />
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edt_pre_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
-                    android:drawablePadding="@dimen/activity_vertical_margin"
-                    android:hint="ENTER EMAIL ID"
-                    android:inputType="text"
-                    android:paddingLeft="@dimen/activity_vertical_margin"
-                    app:met_floatingLabel="highlight"
-                    app:met_maxCharacters="60" />
+                </android.support.design.widget.TextInputLayout>
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edt_pre_landline"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
-                    android:drawablePadding="@dimen/activity_vertical_margin"
-                    android:hint="ENTER LANDLINE NUMBER"
-                    android:inputType="number"
-                    android:paddingLeft="@dimen/activity_vertical_margin"
-                    app:met_floatingLabel="highlight"
-                    app:met_maxCharacters="10" />
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                    <EditText
+                        android:id="@+id/edt_pre_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address"
+                        android:inputType="textMultiLine"
+                        android:maxLength="6"
+                        android:maxLines="4"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                    <EditText
+                        android:id="@+id/edt_pre_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email Id"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                    <EditText
+                        android:id="@+id/edt_pre_landline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Landline Number"
+                        android:inputType="number"
+                        android:singleLine="true"/>
+
+                </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/btn_pre_submit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="25dp"
-                    android:background="@drawable/btn_background"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:background="@color/colorAccent"
                     android:gravity="center"
-                    android:text="SUBMIT"
-                    android:textColor="@color/white" />
+                    android:text="submit"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
             </LinearLayout>
         </ScrollView>
     </android.support.v7.widget.CardView>

@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,8 +39,9 @@ import banyan.com.fiducial.Global.App_Config;
 import banyan.com.fiducial.Global.Session_Manager;
 import banyan.com.fiducial.Global.Toast_Show;
 import banyan.com.fiducial.R;
+import dmax.dialog.SpotsDialog;
 
-public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.OnClickListener{
+public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.OnClickListener {
     public static String TAG_CUSTOMER_NAME = "customer_name";
     public static String TAG_Address1 = "address1";
     public static String TAG_ADDRESS2 = "address2";
@@ -50,12 +54,15 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
     public static String TAG_EMAIl = "email";
     public static String TAG_USERID = "user_id";
     public static String TAG_USERTYPE = "user_type";
-    String str_userId,str_userTpye;
+
+    String str_userId, str_userTpye;
     Session_Manager session_manager;
     Toolbar mToolbar;
-    EditText edt_pre_name,edt_pre_mobile,edt_pre_zipcode,edt_pre_address,
-            edt_pre_email,edt_pre_landline;
-  // state parames
+    SpotsDialog dialog;
+
+    EditText edt_pre_name, edt_pre_mobile, edt_pre_zipcode, edt_pre_address,
+            edt_pre_email, edt_pre_landline;
+    // state parames
     public static final String TAG_STATE_NAME = "state_name";
     public static final String TAG_STATE_ID = "state_id";
 
@@ -64,51 +71,26 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
 
     Button btn_summit;
 
-    ArrayList<HashMap<String, String>> state_list;
-    ArrayList<HashMap<String, String>> city_list;
-    ArrayList<String> state_name, state_id;
-    ArrayList<String> city_name, city_id;
+    ArrayList<String> Arraylist_state_id = null;
+    ArrayList<String> Arraylist_state_name = null;
 
-    ArrayAdapter<String> mState,mCity;
+    ArrayList<String> Arraylist_city_id = null;
+    ArrayList<String> Arraylist_city_name = null;
+
+    ArrayAdapter<String> mState, mCity;
     public static RequestQueue queue;
-    Spinner spn_pre_state,spn_pre_city;
+    Spinner spn_pre_state, spn_pre_city;
+
+    TextView t1;
+    String str_state, str_state_id, str_city_id, str_city_name;
 
     // edittext field string name
-    String customer_name,address1,address2,city,state,country,postalcode,phonoNo,mobileNo,Email,UserId,UserType;
+    String customer_name, address1, address2, city, state, country, postalcode, phonoNo, mobileNo, Email, UserId, UserType;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pre_enquiry);
-
-        state_name = new ArrayList<>();
-        state_id = new ArrayList<>();
-        city_name = new ArrayList<>();
-        city_id = new ArrayList<>();
-
-        session_manager=new Session_Manager(getApplicationContext());
-        session_manager.checkLogin();
-        HashMap<String,String> user=session_manager.getUserDetails();
-        str_userId = user.get(Session_Manager.KEY_USER_ID);
-        str_userTpye = user.get(Session_Manager.KEY_USER_TYPE);
-
-        edt_pre_name = (EditText) findViewById(R.id.edt_pre_name);
-        edt_pre_mobile = (EditText) findViewById(R.id.edt_pre_mobile);
-        edt_pre_zipcode = (EditText) findViewById(R.id.edt_pre_zipcode);
-        edt_pre_address = (EditText) findViewById(R.id.edt_pre_address);
-        edt_pre_email = (EditText) findViewById(R.id.edt_pre_email);
-        edt_pre_landline = (EditText) findViewById(R.id.edt_pre_landline);
-        btn_summit = (Button) findViewById(R.id.btn_pre_submit);
-        btn_summit.setOnClickListener(this);
-        spn_pre_state =(SearchableSpinner)findViewById(R.id.spn_pre_state); // state
-        spn_pre_city =(SearchableSpinner)findViewById(R.id.spn_pre_city); // city
-
-        mState = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,state_name);
-        mState.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_pre_state.setAdapter(mState);
-
-        mCity = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,city_name);
-        mCity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_pre_city.setAdapter(mCity);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("ADD ENQUIRY");
@@ -131,51 +113,116 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
             }
         });
 
+        session_manager = new Session_Manager(getApplicationContext());
+        session_manager.checkLogin();
+        HashMap<String, String> user = session_manager.getUserDetails();
+        str_userId = user.get(Session_Manager.KEY_USER_ID);
+        str_userTpye = user.get(Session_Manager.KEY_USER_TYPE);
+
+        edt_pre_name = (EditText) findViewById(R.id.edt_pre_name);
+        edt_pre_mobile = (EditText) findViewById(R.id.edt_pre_mobile);
+        edt_pre_zipcode = (EditText) findViewById(R.id.edt_pre_zipcode);
+        edt_pre_address = (EditText) findViewById(R.id.edt_pre_address);
+        edt_pre_email = (EditText) findViewById(R.id.edt_pre_email);
+        edt_pre_landline = (EditText) findViewById(R.id.edt_pre_landline);
+        btn_summit = (Button) findViewById(R.id.btn_pre_submit);
+
+        spn_pre_state = (SearchableSpinner) findViewById(R.id.spn_pre_state); // state
+        spn_pre_city = (SearchableSpinner) findViewById(R.id.spn_pre_city); // city
+
+        btn_summit.setOnClickListener(this);
+
+        Arraylist_state_id = new ArrayList<String>();
+        Arraylist_state_name = new ArrayList<String>();
+
+        Arraylist_city_id = new ArrayList<String>();
+        Arraylist_city_name = new ArrayList<String>();
+
+        spn_pre_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                System.out.println("Group");
+
+                t1 = (TextView) view;
+                str_state = t1.getText().toString();
+                str_state_id = Arraylist_state_id.get(position);
+
+                System.out.println("State ID : " + Arraylist_state_id);
+
+                Arraylist_city_id.clear();
+                Arraylist_city_name.clear();
+
+                if (str_state_id == null) {
+                    TastyToast.makeText(getApplicationContext(), "Please Select a State", TastyToast.LENGTH_SHORT, TastyToast.WARNING);
+                } else {
+                    dialog = new SpotsDialog(Actvity_Add_Pre_Enquiry.this);
+                    dialog.show();
+                    queue = Volley.newRequestQueue(Actvity_Add_Pre_Enquiry.this);
+                    Function_Get_City();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        spn_pre_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                System.out.println("Product");
+
+                t1 = (TextView) view;
+
+                str_city_name = t1.getText().toString();
+                str_city_id = Arraylist_city_id.get(position);
+
+                System.out.println("City ID : " + str_city_id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         try {
 
-            state_list = new ArrayList<>();
-            state_name = new ArrayList<>();
-            state_id = new ArrayList<>();
-
+            Arraylist_state_name.clear();
+            Arraylist_state_id.clear();
+            dialog = new SpotsDialog(Actvity_Add_Pre_Enquiry.this);
+            dialog.show();
             queue = Volley.newRequestQueue(getApplicationContext());
-            GetStateList ();
-
-        } catch (Exception e) {
-
-        }
-        try {
-
-            city_list = new ArrayList<>();
-            city_name = new ArrayList<>();
-            city_id = new ArrayList<>();
-
-            queue = Volley.newRequestQueue(getApplicationContext());
-            GetCityList ();
+            Function_Get_State();
 
         } catch (Exception e) {
 
         }
     }
 
-    /**
-     * state list api
-     */
-    public void GetStateList() {
+    /***************************
+     * GET State Info
+     ***************************/
 
-        StringRequest request = new StringRequest(Request.Method.POST, App_Config.url_state, new Response.Listener<String>() {
+    public void Function_Get_State() {
+
+        System.out.println("### AppConfig.url_user_shop_list " + App_Config.url_state);
+        StringRequest request = new StringRequest(Request.Method.POST,
+                App_Config.url_state, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-
-
+                Log.d("TAG STATE", response.toString());
                 try {
-
-                    System.out.println("USER_GET_RESPONSE :"+response);
-
                     JSONObject obj = new JSONObject(response);
-                    int status = obj.getInt("status");
+                    int success = obj.getInt("status");
 
-                    if (status == 1) {
+                    if (success == 1) {
 
                         JSONArray arr;
 
@@ -184,41 +231,45 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
                         for (int i = 0; arr.length() > i; i++) {
                             JSONObject obj1 = arr.getJSONObject(i);
 
-                            String name = obj1.getString(TAG_STATE_NAME);
                             String id = obj1.getString(TAG_STATE_ID);
+                            String name = obj1.getString(TAG_STATE_NAME);
 
-                            System.out.println("printId :"+id+" "+name);
-                            state_name.add(name);
-                            state_id.add(id);
+                            Arraylist_state_name.add(name);
+                            Arraylist_state_id.add(id);
 
+                            try {
+                                spn_pre_state
+                                        .setAdapter(new ArrayAdapter<String>(Actvity_Add_Pre_Enquiry.this,
+                                                android.R.layout.simple_spinner_dropdown_item,
+                                                Arraylist_state_name));
+
+                            } catch (Exception e) {
+
+                            }
                         }
 
-                        System.out.println("TASK HASHMAP ARRAY" + state_list);
+                        dialog.dismiss();
+                    } else if (success == 0) {
 
-                        try {
+                        dialog.dismiss();
+                        TastyToast.makeText(getApplicationContext(), "No State Found", TastyToast.LENGTH_SHORT, TastyToast.WARNING);
 
-                            spn_pre_state.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
-                                    android.R.layout.simple_spinner_dropdown_item, state_name));
-
-                        } catch (Exception e) {
-
-                        }
                     }
 
+                    dialog.dismiss();
                 } catch (JSONException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-
-
-
             }
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                dialog.dismiss();
 
+                TastyToast.makeText(getApplicationContext(), "Internal Error !", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
             }
         }) {
 
@@ -235,25 +286,24 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
         queue.add(request);
     }
 
-    /**
-     * city api
-     */
-    public void GetCityList() {
+    /***************************
+     * GET City Info
+     ***************************/
 
-        StringRequest request = new StringRequest(Request.Method.POST, App_Config.url_city, new Response.Listener<String>() {
+    public void Function_Get_City() {
+
+        System.out.println("### AppConfig.url_user_city_list " + App_Config.url_city);
+        StringRequest request = new StringRequest(Request.Method.POST,
+                App_Config.url_city, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-
-
+                Log.d("TAG City", response.toString());
                 try {
-
-                    System.out.println("USER_GET_RESPONSE :"+response);
-
                     JSONObject obj = new JSONObject(response);
-                    int status = obj.getInt("status");
+                    int success = obj.getInt("status");
 
-                    if (status == 1) {
+                    if (success == 1) {
 
                         JSONArray arr;
 
@@ -262,33 +312,45 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
                         for (int i = 0; arr.length() > i; i++) {
                             JSONObject obj1 = arr.getJSONObject(i);
 
-                            String name = obj1.getString(TAG_CITY_NAME);
                             String id = obj1.getString(TAG_CITY_ID);
+                            String name = obj1.getString(TAG_CITY_NAME);
 
-                            System.out.println("printId :" + id);
+                            Arraylist_city_name.add(name);
+                            Arraylist_city_id.add(id);
 
-                            city_name.add(name);
-                            city_id.add(id);
+                            try {
+                                spn_pre_city
+                                        .setAdapter(new ArrayAdapter<String>(Actvity_Add_Pre_Enquiry.this,
+                                                android.R.layout.simple_spinner_dropdown_item,
+                                                Arraylist_city_name));
 
+                            } catch (Exception e) {
+
+                            }
                         }
 
-                        System.out.println("TASK HASHMAP ARRAY" + city_list);
+                        dialog.dismiss();
+                    } else if (success == 0) {
+
+                        dialog.dismiss();
+                        TastyToast.makeText(getApplicationContext(), "No City Found", TastyToast.LENGTH_SHORT, TastyToast.WARNING);
+
                     }
 
+                    dialog.dismiss();
                 } catch (JSONException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-
-
-
             }
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                dialog.dismiss();
 
+                TastyToast.makeText(getApplicationContext(), "Internal Error !", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
             }
         }) {
 
@@ -296,7 +358,9 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("state_id", state_id.toString());
+                params.put("state_id", str_state_id);
+
+                System.out.println("SELECTED STATE ID" + str_state_id);
 
                 return params;
             }
@@ -306,7 +370,6 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
         // Adding request to request queue
         queue.add(request);
     }
-
 
     // send all enquiry data to server
     public void Prelinimanary_EnquiryDetails() {
@@ -322,16 +385,13 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
                     int status = obj_one.getInt("status");
                     String message = obj_one.getString("message");
 
-                    if(status == 1)
-                    {
-                        TastyToast.makeText(getApplicationContext(),"Enquiry Added Successfully",TastyToast.LENGTH_SHORT,TastyToast.SUCCESS);
-                        Intent back_enquiry = new Intent(getApplicationContext(),Actvitity_Customize_Grid.class);
-                        back_enquiry.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    if (status == 1) {
+                        TastyToast.makeText(getApplicationContext(), "Enquiry Added Successfully", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
+                        Intent back_enquiry = new Intent(getApplicationContext(), Actvitity_Customize_Grid.class);
+                        back_enquiry.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                         startActivity(back_enquiry);
-                    }
-                    else
-                    {
-                        TastyToast.makeText(getApplicationContext(),"Enquiry Added Unsuccessfully",TastyToast.LENGTH_SHORT,TastyToast.ERROR);
+                    } else {
+                        TastyToast.makeText(getApplicationContext(), "Enquiry Added Unsuccessfully", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                     }
 
                 } catch (JSONException e) {
@@ -352,16 +412,16 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
 
                 params.put(TAG_CUSTOMER_NAME, customer_name);
                 params.put(TAG_Address1, "");
-                params.put(TAG_ADDRESS2,"");
-                params.put(TAG_CITY,city_name.toString());
-                params.put(TAG_STATE,state_name.toString());
-                params.put(TAG_COUNTRY,"INDIA");
-                params.put(TAG_POSTALCODE,"");
-                params.put(TAG_PHO_NO,"");
-                params.put(TAG_MOB_NO,mobileNo);
-                params.put(TAG_EMAIl,"");
-                params.put(TAG_USERID,str_userId);
-                params.put(TAG_USERTYPE,str_userTpye);
+                params.put(TAG_ADDRESS2, "");
+                params.put(TAG_CITY, str_city_id);
+                params.put(TAG_STATE, str_state_id);
+                params.put(TAG_COUNTRY, "INDIA");
+                params.put(TAG_POSTALCODE, "");
+                params.put(TAG_PHO_NO, "");
+                params.put(TAG_MOB_NO, mobileNo);
+                params.put(TAG_EMAIl, "");
+                params.put(TAG_USERID, str_userId);
+                params.put(TAG_USERTYPE, str_userTpye);
 
                 return params;
 
@@ -374,18 +434,14 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
     public void onClick(View v) {
         customer_name = edt_pre_name.getText().toString();
         mobileNo = edt_pre_mobile.getText().toString();
-        if(customer_name.isEmpty())
-        {
-            Toast_Show.displayToast(getApplicationContext(),"Please Enter the Customer name");
-        }
-        else if(mobileNo.isEmpty() || mobileNo.length()<10)
-        {
-            Toast_Show.displayToast(getApplicationContext(),"Please Enter the Valid mobile number");
-        }else
-        {
+        if (customer_name.isEmpty()) {
+            Toast_Show.displayToast(getApplicationContext(), "Please Enter the Customer name");
+        } else if (mobileNo.isEmpty() || mobileNo.length() < 10) {
+            Toast_Show.displayToast(getApplicationContext(), "Please Enter the Valid mobile number");
+        } else {
             Prelinimanary_EnquiryDetails();
-            Intent intent=new Intent(Actvity_Add_Pre_Enquiry.this,Activity_Menu.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NO_HISTORY);
+            Intent intent = new Intent(Actvity_Add_Pre_Enquiry.this, Activity_Menu.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
         }
     }

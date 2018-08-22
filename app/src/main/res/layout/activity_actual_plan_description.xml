@@ -31,8 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textColorHint="@color/colorPrimaryDark">
+            android:layout_marginTop="@dimen/activity_vertical_margin">
 
             <EditText
                 android:id="@+id/schedule_edt_taskname"

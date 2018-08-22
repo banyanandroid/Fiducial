@@ -27,7 +27,7 @@ public class Actvitity_Customize_Grid extends Activity implements View.OnClickLi
         gridLayout=(GridLayout)findViewById(R.id.mainGrid);
         fabenquiry = (FloatingActionButton)findViewById(R.id.fabgrid_enquiry);
         fabenquiry.setOnClickListener(this);
-        setSingleEvent(gridLayout);
+       // setSingleEvent(gridLayout);
     }
 
     private void setSingleEvent(GridLayout gridLayout) {
