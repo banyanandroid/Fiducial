@@ -36,6 +36,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity android:name=".Activity.Actvitity_Customize_Grid"/>
+        <activity android:name=".Activity.Activity_Detail_Enquiry"/>
 
     </application>
 

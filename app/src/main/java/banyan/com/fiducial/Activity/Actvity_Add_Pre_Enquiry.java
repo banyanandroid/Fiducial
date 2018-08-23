@@ -123,6 +123,8 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
         str_userId = user.get(Session_Manager.KEY_USER_ID);
         str_userTpye = user.get(Session_Manager.KEY_USER_TYPE);
 
+        System.out.println("CHECK :"+str_userId +" "+str_userTpye);
+
         edt_pre_name = (EditText) findViewById(R.id.edt_pre_name);
         edt_pre_mobile = (EditText) findViewById(R.id.edt_pre_mobile);
         edt_pre_zipcode = (EditText) findViewById(R.id.edt_pre_zipcode);
@@ -166,6 +168,7 @@ public class Actvity_Add_Pre_Enquiry extends AppCompatActivity implements View.O
                     Function_Get_City();
                 }
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

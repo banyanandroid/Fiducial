@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Name"
+                            android:inputType="text"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_pan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="PAN Number"
+                            android:inputType="text"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_gst"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="GST Number"
+                            android:inputType="number"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Address"
+                            android:inputType="textMultiLine"
+                            android:maxLength="6"
+                            android:maxLines="4"
+                            android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_zipcode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Zip Code"
+                            android:inputType="phone"
+                            android:maxLength="6"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/det_select_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_state"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select City" />
+
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_city"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select State" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/det_select_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_lead_ref"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select Lead referred by" />
+
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_idus_seg"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select Segment" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/det_select_segment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_org_type"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select Org.Type" />
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_vertical"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select vertical" />
+                    </LinearLayout>
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_landline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Landline Number"
+                            android:inputType="number"
+                            android:singleLine="true"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_mobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Mobile Number"
+                            android:inputType="number"
+                            android:singleLine="true"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_fax"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Fax"
+                            android:inputType="text"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_website"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Website"
+                            android:inputType="text"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Email"
+                            android:inputType="text"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_contact_person"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Contact Person"
+                            android:inputType="text"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_designation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Designation"
+                            android:inputType="text"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Location"
+                            android:inputType="text"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_det_remarks"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Remarks"
+                            android:inputType="textMultiLine"
+                            android:maxLength="6"
+                            android:maxLines="4"
+                            android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <Button
+                android:id="@+id/btn_det_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="ADD MORE"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_contact_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Name"
+                            android:inputType="text"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_contact_design"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Design/Rel"
+                            android:inputType="text"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_contact_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Address"
+                            android:inputType="textMultiLine"
+                            android:maxLength="6"
+                            android:maxLines="4"
+                            android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="180dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                            <EditText
+                                android:id="@+id/edt_contact_mobile"
+                                android:layout_width="200dp"
+                                android:layout_height="match_parent"
+                                android:hint="Mobile"
+                                android:layout_marginRight="5dp"
+                                android:inputType="text"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="180dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                            <EditText
+                                android:id="@+id/edt_contact_email"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:hint="Email"
+                                android:inputType="text"
+                                android:singleLine="true" />
+
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                            <EditText
+                                android:id="@+id/edt_contact_dob"
+                                android:layout_width="180dp"
+                                android:layout_height="match_parent"
+                                android:hint="DOB"
+                                android:layout_marginRight="5dp"
+                                android:inputType="text"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                            <EditText
+                                android:id="@+id/edt_contact_marriage"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:hint="Marriage"
+                                android:inputType="text"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <Button
+                android:id="@+id/btn_det_contact_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="ADD MORE"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_policy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/det_policy_dep"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_poly_dep"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select policy Department" />
+
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_poly_type"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select polict type" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/det_policy_insu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_insurance"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select Insurance" />
+
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_priority"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select Priority" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/det_policy_make"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_make"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select make" />
+
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/spn_det_model"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            app:hintText="Select model" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                            <EditText
+                                android:id="@+id/edt_contact_exp_date"
+                                android:layout_width="200dp"
+                                android:layout_height="match_parent"
+                                android:hint="Expire Date"
+                                android:layout_marginRight="5dp"
+                                android:inputType="text"
+                                android:singleLine="true" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                            <EditText
+                                android:id="@+id/edt_contact_premium"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:hint="Premium"
+                                android:inputType="text"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="180dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                            <EditText
+                                android:id="@+id/edt_contact_brokerage"
+                                android:layout_width="180dp"
+                                android:layout_height="match_parent"
+                                android:hint="Brokerage"
+                                android:layout_marginRight="5dp"
+                                android:inputType="text"
+                                android:singleLine="true" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="180dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                            <EditText
+                                android:id="@+id/edt_contact_vehicle_no"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:hint="vehicle No"
+                                android:inputType="text"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_contact_make_year"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Make Year"
+                            android:inputType="text"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <EditText
+                            android:id="@+id/edt_contact_remark"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Remark"
+                            android:inputType="textMultiLine"
+                            android:maxLength="6"
+                            android:maxLines="4"
+                            android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/btn_pre_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="submit"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
